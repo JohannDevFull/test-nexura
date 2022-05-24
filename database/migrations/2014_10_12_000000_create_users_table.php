@@ -22,6 +22,12 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+
+            $table->char('sex');
+            $table->integer('boletin');
+            $table->foreignId('fk_area_id')->references('id')->on('areas');
+            $table->text('description');
+
             $table->timestamps();
         });
     }
@@ -33,6 +39,7 @@ return new class extends Migration
      */
     public function down()
     {
+        
         Schema::dropIfExists('users');
     }
 };
