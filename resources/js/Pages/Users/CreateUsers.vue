@@ -389,16 +389,16 @@ export default {
 		        	required: true,
 		        	email: true,
 		      	},
-		      	email: {
-		        	required: true,
-		        	email: true,
-		      	},
 				area_id: {
 					required: true,
 				},
 				description: {
 					required: true,
 				},
+		      	password: {
+		        	required: true,
+					minlength: 5
+		      	},
 				password_confirmation: {
 					required: true,
 					minlength: 5
@@ -419,7 +419,6 @@ export default {
 		     		$("#error-ratios").addClass('error-j');
 		     	}
 		      	error.addClass('invalid-feedback');
-
 		    },
 		    highlight: function (element, errorClass, validClass) {
 
@@ -469,10 +468,7 @@ export default {
     	{
 	     	this.errors=[];
 
-	     	if (this.form_user.roles_user.length == 0)
-	     	{
-	     	}
-	     	else
+	     	if (this.form_user.roles_user.length != 0)
 	     	{
 	            await axios.post('../users',this.form_user)
 	            .then(response => {

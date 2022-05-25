@@ -139,6 +139,8 @@ class UsersController extends Controller
     {
         $user = User::find($request->id);
         $user->roles_user = $user->getRoleNames();
+        $user->area_id = $user->fk_area_id;
+        $user->subscription = $user->boletin == 1 ? true : false ;
 
         return Inertia::render('Users/EditUser', [
             'can'   => [
@@ -160,14 +162,13 @@ class UsersController extends Controller
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'user_name'     => 'required|unique:users',
+            'id'            => 'required',
             'name'          => 'required',
-            'last_name'     => 'required',
             'email'         => 'required',
-            // 'email'         => 'required|email|unique:users',
-            // 'test'          => 'required'
+            'sex'           => 'required',
+            'area_id'       => 'required',
+            'description'   => 'required'
         ]);
-
         if ($validator->fails())
         {
             return response()->json([
@@ -176,16 +177,34 @@ class UsersController extends Controller
                 'errors'    => $validator->errors(),
             ]);
         }
+        $validator = Validator::make($request->all(), [
+            'email'         => 'required|email|unique:users',
+        ]);
+        $user = User::find( $request->id );
+        
+        if ($user->email != $request->email )
+        {
+            # code...
+
+            if ($validator->fails())
+            {
+                return response()->json([
+                    'status'    => 'error',
+                    'masage'    => 'Email en uso.',
+                    'errors'    => $validator->errors(),
+                ]);
+            }
+        }
+
 
         $user = User::where('id', $request->id)
         ->update([
-            'user_name'     => $request->user_name,
             'name'          => $request->name,
-            'last_name'     => $request->last_name,
             'email'         => $request->email,
-            'phone'         => $request->phone,
-            'address'       => $request->address,
-            'country'       => $request->country
+            'sex'           => $request->sex,
+            'boletin'       => $request->subscription,
+            'fk_area_id'    => $request->area_id,
+            'description'   => $request->description
         ]);
 
         return response()->json([
