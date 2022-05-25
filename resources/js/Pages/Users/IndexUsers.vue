@@ -59,14 +59,41 @@
                                       <i class="fas fa-angle-double-up text-primary" v-else></i>
                                     </template>
                                 </th>
-                                
-                              <th>ID</th>
-                              <th>Name</th>
-                              <th>Email</th>
-                              <th>Sexo</th>
-                              <th>Area</th>
-                              <th>Bolentin</th>
-                              <th style="width: 182px;">Actions</th>
+
+                                <th scope="col" style="cursor:pointer" @click="changeOrder('name')">
+                                    Nombre
+                                    <template v-if="field == 'name'">
+                                      <i class="fas fa-angle-double-down text-primary" v-if="order == 'DESC'"></i>
+                                      <i class="fas fa-angle-double-up text-primary" v-else></i>
+                                    </template>
+                                </th>
+
+                                <th scope="col" style="cursor:pointer" @click="changeOrder('email')">
+                                    Email
+                                    <template v-if="field == 'email'">
+                                      <i class="fas fa-angle-double-down text-primary" v-if="order == 'DESC'"></i>
+                                      <i class="fas fa-angle-double-up text-primary" v-else></i>
+                                    </template>
+                                </th>
+
+                                <th scope="col" style="cursor:pointer" @click="changeOrder('sex')">
+                                    Sexo
+                                    <template v-if="field == 'sex'">
+                                      <i class="fas fa-angle-double-down text-primary" v-if="order == 'DESC'"></i>
+                                      <i class="fas fa-angle-double-up text-primary" v-else></i>
+                                    </template>
+                                </th>
+
+                                <th scope="col" style="cursor:pointer" @click="changeOrder('area_name')">
+                                    Area
+                                    <template v-if="field == 'area_name'">
+                                      <i class="fas fa-angle-double-down text-primary" v-if="order == 'DESC'"></i>
+                                      <i class="fas fa-angle-double-up text-primary" v-else></i>
+                                    </template>
+                                </th>
+                                <th>Bolentin</th>
+
+                                <th style="width: 182px;">Actions</th>
                             </tr>
 
                         </thead>
@@ -120,13 +147,66 @@
                 </div>
 
                 <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                    </ul>
+                    <div class="col-sm-12 col-md-7">
+                <div
+                  class="dataTables_paginate paging_simple_numbers"
+                  id="example1_paginate"
+                >
+                  <ul class="pagination flex-wrap"  >
+                    <li
+                      v-if="pagination.current_page > 1"
+                      class="paginate_button page-item previous"
+                      id="example1_previous"
+                    >
+                      <a
+                        href="#"
+                        @click.prevent="
+                          changePage(pagination.current_page - 1)
+                        "
+                        aria-controls="example1"
+                        data-dt-idx="0"
+                        tabindex="0"
+                        class="page-link"
+                        >Atras</a
+                      >
+                    </li>
+                    <li
+                      class="paginate_button page-item"
+                      v-for="page in pagesNumber"
+                      :key="page"
+                      v-bind:class="[page == isActived ? 'active' : '']"
+                    >
+                      <a
+                        href="#"
+                        @click.prevent="changePage(page)"
+                        aria-controls="example1"
+                        data-dt-idx="1"
+                        tabindex="0"
+                        class="page-link"
+                        >{{ page }}</a
+                      >
+                    </li>
+
+                    <li
+                      v-if="pagination.current_page < pagination.last_page"
+                      class="paginate_button page-item next"
+                      id="example1_next"
+                    >
+                      <a
+                        href="#"
+                        @click.prevent="
+                          changePage(pagination.current_page + 1)
+                        "
+                        aria-controls="example1"
+                        data-dt-idx="7"
+                        tabindex="0"
+                        class="page-link"
+                        >Siguiente</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
                 </div>
 
             </div>
