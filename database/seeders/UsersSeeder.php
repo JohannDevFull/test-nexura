@@ -33,7 +33,7 @@ class UsersSeeder extends Seeder
 
         $user_two = User::create([
             'name'          => 'User test dev',
-            'email'         => 'dev.test@gmail.com',
+            'email'         => 'dev.test@test.com',
             'password'      => bcrypt("admin.123"),
             'sex'           => 'M',
             'boletin'       => true,
