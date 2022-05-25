@@ -10,8 +10,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+
 
 use App\Models\User;
 
@@ -76,7 +78,8 @@ class UsersController extends Controller
             'can' => [
                 'create_user' => Auth::user()->can('users.create'),
             ],
-            'roles' => Role::all()->pluck('name')
+            'roles' => Role::all()->pluck('name'),
+            'areas' => DB::select('SELECT * FROM areas ')
         ]);
     }
 
@@ -89,12 +92,12 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_name'     => 'required|unique:users',
             'name'          => 'required',
-            'last_name'     => 'required',
             'email'         => 'required|email|unique:users',
             'password'      => 'required',
-            'roles_user'    => 'required',
+            'sex'           => 'required',
+            'area_id'       => 'required',
+            'description'   => 'required',
             'password_confirmation' => 'required'
         ]);
 
@@ -108,14 +111,14 @@ class UsersController extends Controller
         }
 
         $user = User::create([
-            'user_name'     => $request->user_name,
             'name'          => $request->name,
-            'last_name'     => $request->last_name,
             'email'         => $request->email,
-            'phone'         => 7878780,
-            // 'phone'         => $request->phone,
-            'password'      => Hash::make($request->password)
-        ]);
+            'password'      => Hash::make($request->password),
+            'sex'           => $request->sex,
+            'boletin'       => $request->subscription,
+            'fk_area_id'    => $request->area_id,
+            'description'   => $request->description,
+        ]); 
 
         $user->assignRole($request->roles_user);
 
@@ -142,7 +145,8 @@ class UsersController extends Controller
                 'edit_user' => Auth::user()->can('users.edit'),
             ],
             'user'  => $user,
-            'roles' => Role::all()->pluck('name')
+            'roles' => Role::all()->pluck('name'),
+            'areas' => DB::select('SELECT * FROM areas ')
         ]);
     }
 

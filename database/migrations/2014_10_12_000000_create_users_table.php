@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
 
             $table->char('sex');
-            $table->boolean('boletin')->default(false);
+            $table->boolean('boletin')->nullable()->default(false);
             $table->foreignId('fk_area_id')->references('id')->on('areas');
             $table->text('description');
             $table->integer('current_rol_id')->default(0);

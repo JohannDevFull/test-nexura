@@ -5,15 +5,13 @@ export const useUserStore = defineStore('user', {
     return {
         user_data:{
             id:0,
-            user_name: '',
+            area_id:0,
             name: '',
-            last_name: '',
+            sex: '',
+            description: '',
+            subscription: '',
             password: '',
             password_confirmation: '',
-            email: '',
-            phone:'',
-            address:'',
-            country:'',
             roles_user: []
         }
     }

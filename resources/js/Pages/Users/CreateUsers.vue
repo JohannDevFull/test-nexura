@@ -31,181 +31,252 @@
 				      	<div class="card-body " >
 					      	
 					      	<div class="col-12 ">
+
 						        <h4 class="mb-3">Información usuario</h4>
-						        
-						        <form id="form_user" class="needs-validation" >
-						          
-						          	<div class="row g-3 mb-3">
+						        <div class="alert alert-info" role="alert">
+							        Los campos con <span class="text-danger">(*)</span> son obligatorios.
+								</div>
 
-							          	<div class="col-6">
-							              	<label for="username" class="form-label">
-							              		Username
-							              		<span class="text-danger">(*)</span>
-							              	</label>
-							              	<div class="input-group has-validation">
-							                	<span class="input-group-text"><i class="fas fa-user"></i></span>
-							                	<input 
-							                		id="user_name" 
-							                		name="user_name" 
-							                		type="text" 
-							                		class="form-control" 
-							                		placeholder="Username"
-							                		v-model="form_user.user_name"
-							                		>
-								              	<div class="invalid-feedback">
-								                  El campo "Username" es obligatorio.
-								                </div>
-								            </div>
-							            </div>
+						        <form id="form_user" class="needs-validation">
 
-							            <div class="col-6">
-							              	<label for="email" class="form-label">
-							              		Email
-							              		<span class="text-danger">(*)</span>
-							              	</label>
-							              	<div class="input-group has-validation">
-							                	<span class="input-group-text">@</span>
-								              	<input 
-								              		id="email" 
-								              		name="email" 
-								              		type="email" 
-								              		class="form-control" 
-								              		placeholder="you@example.com"
-								              		v-model="form_user.email"
-								              		>
-								              	<div class="invalid-feedback">
-								                	Por favor ingresar un correo electronico valido.
-								              	</div>
-								            </div>
-							            </div>
-							            
-							            <div class="col-sm-6">
-							              	<label for="firstName" class="form-label">
-							              		Nombres
-							              		<span class="text-danger">(*)</span>
-							              	</label>
-							              	<input 
-									          	id="name"  
-									          	type="text" 
-									          	class="form-control was-validated" 
-									          	placeholder="Nombre" 
-									          	name="name"
-									          	v-model="form_user.name" 
-									          	required
-									          	>
-							              	<div class="invalid-feedback">
-							                	Valid first name is required.
-							              	</div>
-							            </div>
-
-							            <div class="col-sm-6">
-							              	<label for="lastName" class="form-label">
-							              		Apellidos
-							              		<span class="text-danger">(*)</span>
-							              	</label>
-							              	<input 
-							              		id="lastName" 
-							              		name="last_name" 
+						        	<div class="form-group row">
+									    <label for="inputEmail3" class="col-sm-3 col-form-label">
+									    	Nombres completos
+									    	<span class="text-danger">(*)</span> 
+									    </label>
+									    <div class="col-sm-9">
+									      	<input 
+							              		id="name" 
+							              		name="name"
 							              		type="text" 
 							              		class="form-control" 
-							              		placeholder=""
-							              		v-model="form_user.last_name"  
+							              		placeholder="Nombre completo del usuario"
+							              		v-model="form_user.name"
 							              		>
-							              <div class="invalid-feedback">
-							                Valid last name is required.
-							              </div>
-							            </div>
+							              	<div class="invalid-feedback">
+							                	Campo obligatorio.
+							              	</div>
+									    </div>
+								  	</div>
+								  
+								  	<div class="form-group row">
+									    <label for="inputEmail3" class="col-sm-3 col-form-label">
+									    	Correo electronico
+									    	<span class="text-danger">(*)</span> 
+									    </label>
+									    <div class="col-sm-9">
+									      	<input 
+							              		id="email" 
+							              		name="email" 
+							              		type="email" 
+							              		class="form-control" 
+							              		placeholder="you@example.com"
+							              		v-model="form_user.email"
+							              		>
+							              	<div class="invalid-feedback">
+							                	Por favor ingresar un correo electronico valido.
+							              	</div>
+									    </div>
+								  	</div>
 
-							            <div class="col-sm-6">
-							              	<label for="password" class="form-label">
-							              		Contraseña
-							              		<span class="text-danger">(*)</span>
-							              	</label>
-							              	<input 
-								              	id="password"  
+								  	<fieldset class="form-group row">
+									    <label for="sex" class="col-sm-3 col-form-label">
+									    	Sexo
+									    	<span class="text-danger">(*)</span> 
+									    </label>
+									    <div class="col-sm-9">
+									      	<div class="form-check">
+										        <input 
+										        	class="form-check-input" 
+										        	type="radio" 
+										        	name="gridRadios" 
+										        	id="gridRadios1" 
+										        	value="M" 
+										        	v-model="form_user.sex"
+										        	required 
+										        	>
+										        <label id="sex" class="form-check-label" for="gridRadios1">
+										          Masculino
+										        </label>
+									      	</div>
+									      	<div class="form-check">
+										        <input 
+										        	class="form-check-input" 
+										        	type="radio" 
+										        	name="gridRadios" 
+										        	id="gridRadios2" 
+										        	value="F"
+										        	v-model="form_user.sex"
+										        	required 
+										        	>
+										        <label id="sex" class="form-check-label" for="gridRadios2">
+										          Famenino
+										        </label>
+									      	</div>
+									      	<div class="invalid-feedback" id="error-ratios">
+							                	Campo obligatorio. {{validateSexComputed}}
+							              	</div>
+									    </div>
+								  	</fieldset>
+
+								  	<div class="form-group row">
+									    <label for="inputEmail3" class="col-sm-3 col-form-label">
+									    	Area
+									    	<span class="text-danger">(*)</span> 
+									    </label>
+									    <div class="col-sm-9">
+										  	<div class="input-group mb-3">
+											  	<select 
+											  		id="area"
+											  		name="area" 
+											  		class="form-control custom-select"
+											  		v-model="form_user.area_id" 
+											  		required
+											  		>
+												    <option disabled>Selecione un area</option>
+												    <option value="1" v-for="(item,i) in areas">
+												    	{{item.name}}
+												    </option>
+											  	</select>
+											  	<div class="input-group-append">
+											    	<label class="input-group-text" for="inputGroupSelect02">
+											    		Opciones
+											    	</label>
+											  	</div>
+								              	<div class="invalid-feedback">
+								                	Campo obligatorio.
+								              	</div>
+											</div>
+									    </div>
+								  	</div>
+
+								  	<div class="form-group row">
+									    <label for="inputEmail3" class="col-sm-3 col-form-label">
+									    	Descripción
+									    	<span class="text-danger">(*)</span> 
+									    </label>
+									    <div class="col-sm-9">
+								  			<textarea 
+								  				id="description" 
+								  				name="description" 
+								  				class="form-control" 
+								  				v-model="form_user.description" 
+								  				rows="3"
+								  				>
+								  				
+								  			</textarea>
+								  			<div class="invalid-feedback">
+							                	Campo obligatorio.
+							              	</div>
+									    </div>
+									</div>
+
+									<fieldset class="form-group row">
+									    <label for="sex" class="col-sm-3 col-form-label">
+									    	Roles
+									    	<span class="text-danger">(*)</span> 
+									    </label>
+									    <div class="col-sm-9">
+									      	<div class="form-check" v-for="(rol , i) in roles" :key="i">
+										        <input 
+										        	:id="'rol_'+i" 
+										        	name="roles" 
+										        	class="form-check-input" 
+										        	type="checkbox" 
+										        	:value="rol" 
+										        	v-model="form_user.roles_user"
+										        	>
+										        <label class="form-check-label" :for="'rol_'+i">
+										          {{rol}}
+										        </label>
+									      	</div>
+									      	<div id="rol_validate" class="invalid-feedback">
+							                	Seleccione algun rol. 
+							                	<span class="d-hide">
+							                		{{validateRolesComputed}}
+							                	</span>
+							              	</div>
+									    </div>
+								  	</fieldset>
+
+								  	<div class="form-group row">
+									    <label for="password" class="col-sm-3 col-form-label">
+									    	Contraseña
+									    	<span class="text-danger">(*)</span> 
+									    </label>
+									    <div class="col-sm-9">
+									      	<input 
+							              		id="password"  
 								              	name="password"
 								              	type="password" 
 								              	class="form-control was-validated" 
-								              	placeholder="+++++++" 
-								              	v-model="form_user.password" 
-								              	>
+								              	placeholder="*******" 
+								              	v-model="form_user.password"
+								              	required
+							              		>
 							              	<div class="invalid-feedback">
-							                	Valid first name is required.
+							                	Campo obligatorio.
 							              	</div>
-							            </div>
+									    </div>
+								  	</div>
 
-							            <div class="col-sm-6">
-							              	<label for="password_confirmation" class="form-label">
-							              		Confirmar contraseña
-							              		<span class="text-danger">(*)</span>
-							              	</label>
-							              	<input 
+								  	<div class="form-group row">
+									    <label for="password_confirmation" class="col-sm-3 col-form-label">
+									    	Confirmar contraseña
+									    	<span class="text-danger">(*)</span> 
+									    </label>
+									    <div class="col-sm-9">
+									      	<input 
 							              		id="password_confirmation" 
 							              		name="password_confirmation" 
 							              		type="password" 
 							              		class="form-control" 
-							              		placeholder="" 
+								              	placeholder="*******" 
 							              		v-model="form_user.password_confirmation" 
 							              		required
 							              		>
-						              		<div class="invalid-feedback">
-						                		Valid last name is required.
-						              		</div>
-							            </div>
-
-							            <div class="col-6">
-							              	<label for="country" class="form-label">
-							              		Roles
-							              		<span class="text-danger">(*)</span>
-							              	</label>
-							              	<!-- <v-select 
-							              		multiple 
-							              		v-model="form_user.roles_user" 
-							              		:options="roles" 
-							              		label="name" 
-							              		append-to-body
-							              		:calculate-position="withPopper"
-							              		>
-											</v-select> -->
-	  
-							              	<div id="rol_validate" class="invalid-feedback">
-							                	Seleccione algun rol. {{validateRolesComputed}}
-							              	</div>
-							            </div>
-
-							            <div class="col-sm-6">
-							              	<label for="phone" class="form-label">
-							              		Telefono
-							              		<span class="text-muted">(Optional)</span>
-							              	</label>
-							              	<input 
-								              	id="phone" 
-								              	name="phone" 
-								              	type="text" 
-								              	class="form-control" 
-								              	placeholder="+57 3118523576" 
-							              	>
 							              	<div class="invalid-feedback">
-							                	Valid last name is required.
+							                	Campo obligatorio.
 							              	</div>
-							            </div>
+									    </div>
+								  	</div>
 
-						          	</div>
+								  	<div class="form-group row">
+									    
+									    <label for="password_confirmation" class="col-sm-3 col-form-label">
+									    	Recibir boletín infomativo
+									    </label>
+									    <div class="col-sm-9">
+									    	<div class="form-check">
+										        <input 
+										        	id="subscription"
+										        	name="subscription"
+										        	class="form-check-input" 
+										        	type="checkbox" 
+										        	v-model="form_user.subscription"
+										        	>
+										    </div>
+									    </div>
 
-						          	<div class="d-flex justify-content-center mb-3">
+									</div>
+					  	
+
+					  				<div class="d-flex justify-content-center mb-3">
 										<ul class="list-group">
 											<li class="list-group-item list-group-item-danger" v-for="( item , i ) in errors" :key="i">
 												{{item}}
 											</li>
 										</ul>
 						          	</div>
+								  
 
-						          	<div class="d-flex justify-content-center">
-						          		<button class="m-auto btn btn-primary btn-lg" type="submit">Crear</button>
-						          	</div>
-						          		
 
-						        </form>
+								  	<div class="form-group row">
+									    <div class="col-sm-9">
+									      <button type="submit" class="btn btn-primary">Crear usuario</button>
+									    </div>
+								  	</div>
+								</form>
 					        
 					      	</div>
 					      	
@@ -240,18 +311,34 @@
 	.v-select-error{
 		border: 1px red solid;
 	}
+
+	.form-control.valid{
+		display: block;
+	    border-color: #28a745;
+	    padding-right: calc(1.5em + 0.75rem)!important;
+	    background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e);
+	    background-repeat: no-repeat;
+	    background-position: right calc(0.375em + 0.1875rem) center;
+	    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+	}
+	#sex.valid{
+		display: block;
+	    color: #28a745;
+	}
 </style>
 
 <script>
 
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Swal from 'sweetalert2'
+import { Inertia } from '@inertiajs/inertia'
 
 export default {
-	props:['can','roles'],
+	props:['can','roles','areas'],
     components: {
         AppLayout,
-        Swal
+        Swal,
+        Inertia
     },
     data() {
         return {
@@ -259,13 +346,14 @@ export default {
         	Toast:'',
           	count: 0,
 			form_user:{
-				user_name: '',
 				name: '',
-				last_name: '',
+				description: '',
+				subscription: '',
 				password: '',
 				password_confirmation: '',
 				email: '',
-				phone:'',
+				area_id:'',
+				sex:'',
 		      	roles_user: []
 		    },
 			placement: 'top',
@@ -274,6 +362,8 @@ export default {
         }
     },
     mounted(){
+
+
     	this.Toast = Swal.mixin({
 	      toast: true,
 	      position: 'top-end',
@@ -289,22 +379,25 @@ export default {
 		  
 		$('#form_user').validate({
 		    rules: {
-		    	user_name: {
-			        required: true
-			    },
 			    name: {
 			        required: true
 			    },
-		    	last_name: {
+		    	sex: {
 			        required: true
 			    },
 		      	email: {
 		        	required: true,
 		        	email: true,
 		      	},
-				password: {
+		      	email: {
+		        	required: true,
+		        	email: true,
+		      	},
+				area_id: {
 					required: true,
-					minlength: 5
+				},
+				description: {
+					required: true,
 				},
 				password_confirmation: {
 					required: true,
@@ -319,17 +412,23 @@ export default {
 		    	if (this.form_user.roles_user.length == 0)
 		     	{
 		     		$("#rol_validate").addClass('error-j');
-		     		$("#vs1__combobox").addClass('v-select-error');
+		     	}
+		     	
+		     	if (this.form_user.sex == '')
+		     	{
+		     		$("#error-ratios").addClass('error-j');
 		     	}
 		      	error.addClass('invalid-feedback');
-		      	element.closest('.form-group').append(error);
+
 		    },
 		    highlight: function (element, errorClass, validClass) {
+
 
 		      $(element).addClass('is-invalid');
 		    },
 		    unhighlight: function (element, errorClass, validClass) {
-
+		      
+		      $(element).addClass('valid');
 		      $(element).removeClass('is-invalid');
 		    }
 		});
@@ -338,18 +437,32 @@ export default {
     	validateRolesComputed()
     	{
     		let x = this.form_user.roles_user.length;
-	    	if ( x == 0)
+	    	if ( x != 0)
 	     	{
-
+	     		$("#rol_validate").removeClass('error-j');
+	     		x='';
 	     	}
 	     	else
 	     	{
-	     		$("#rol_validate").removeClass('error-j');
-	     		$("#vs1__combobox").removeClass('v-select-error');
+	     		console.log("Error ss")
+	     	}
+
+	     	return x;
+    	},
+    	validateSexComputed()
+    	{
+    		let x = this.form_user.sex;
+	    	if ( x != '')
+	     	{
+	     		$("#error-ratios").removeClass('error-j');
+	     		$("#sex").removeClass('error-j'); 
+	     		$('.form-check-input').addClass('valid');
+	     		x='';
 	     	}
 
 	     	return x;
     	}
+
     },
     methods:{
     	async store()
@@ -368,10 +481,13 @@ export default {
 		            	Swal.fire({
 							position: 'top-end',
 							icon: 'success',
-							title: 'Your work has been saved',
+							title: 'Usuario creado correctamente',
 							showConfirmButton: false,
 							timer: 1500
-						})
+						});
+
+	    				Inertia.visit('/users');
+							
 	            	}
 	            	else
 	            	{
@@ -390,37 +506,7 @@ export default {
 				    })
 	            });
 	     	}
-    	},
-
-    	withPopper(dropdownList, component, { width }) 
-    	{
-    		dropdownList.style.width = width
-
-		    const popper = createPopper(component.$refs.toggle, dropdownList, {
-		        placement: this.placement,
-		        modifiers: [
-		          {
-		            name: 'offset',
-		            options: {
-		              	offset: [0, -1],
-		            },
-		          },
-		          {
-		            name: 'toggleClass',
-		            enabled: true,
-		            phase: 'write',
-		            fn({ state }) {
-		              component.$el.classList.toggle(
-		                'drop-up',
-		                state.placement === 'top'
-		              )
-		            },
-		          },
-		        ],
-		    });
-
-	      return () => popper.destroy()
-	    }
+    	}
     }
 }
 	
