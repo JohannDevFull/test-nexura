@@ -27,7 +27,7 @@
             <script src="http://127.0.0.1:8000/js/app.js" defer></script>
         @inertiaHead
     </head>
-    <body id="body" class="hold-transition layout-top-nav">
+    <body id="body" class="hold-transition ">
         
         @inertia
 

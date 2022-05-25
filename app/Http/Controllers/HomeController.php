@@ -14,7 +14,9 @@ class HomeController extends Controller
     public function index()
     {
     	# code...
-    	return Inertia::render('Welcome', [
+        Inertia::setRootView('site');
+
+    	return Inertia::render('Home', [
 	        'canLogin' => Route::has('login'),
 	        'canRegister' => Route::has('register'),
 	        'laravelVersion' => Application::VERSION,

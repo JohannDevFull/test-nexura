@@ -61,9 +61,35 @@
     </AppLayout>
 </template>
 
-<script setup>
+<script >
     import AppLayout from '@/Layouts/AppLayout.vue';
     import Welcome from '@/Jetstream/Welcome.vue';
 
+
+export default {
+    components:{
+        AppLayout,
+        Welcome
+    },
+    data() {
+        return {
+          count: 0
+        }
+    },
+    mounted(){
+      setTimeout(()=>{
+          
+          if ($("#body").hasClass("login-page"))
+          {
+              $("#body").removeClass("login-page");
+              $("#body").removeClass("layout-top-nav");
+               // location.reload();
+
+          }
+
+      },200);
+
+    }
+}
     
 </script>
