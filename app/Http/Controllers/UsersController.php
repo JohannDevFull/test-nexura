@@ -75,6 +75,7 @@ class UsersController extends Controller
                 'to'            => $users->lastPage()
             ],
             'users' => $users,
+            'test' => $users,
         ];
     }
 
