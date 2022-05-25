@@ -13,7 +13,14 @@
 
                     <div class="card-tools" style="width: 360px">
                         <div class="input-group input-group-sm mr-2" style="width: 200px; display: inline-flex;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                            <input 
+                                type="text" 
+                                name="table_search" 
+                                @input="getUsers(1, show, search)" 
+                                class="form-control float-right" 
+                                placeholder="Search"
+                                v-model="search"
+                                >
 
                             <div class="input-group-append">
                               <button type="submit" class="btn btn-default">
@@ -44,12 +51,21 @@
                         <thead>
                             
                             <tr>
+                                
+                                <th scope="col" style="cursor:pointer" @click="changeOrder('id')">
+                                    #ID 
+                                    <template v-if="field == 'id'">
+                                      <i class="fas fa-angle-double-down text-primary" v-if="order == 'DESC'"></i>
+                                      <i class="fas fa-angle-double-up text-primary" v-else></i>
+                                    </template>
+                                </th>
+                                
                               <th>ID</th>
                               <th>Name</th>
                               <th>Email</th>
                               <th>Sexo</th>
                               <th>Area</th>
-                              <th>Bolenti</th>
+                              <th>Bolentin</th>
                               <th style="width: 182px;">Actions</th>
                             </tr>
 
@@ -57,7 +73,7 @@
                         
                         <tbody>
 
-                            <tr v-for="(item,i) in users.data" :key="i">
+                            <tr v-for="(item,i) in users_" :key="i">
                                 
                                 <td>{{item.id}}</td>
                                 <td>{{item.name}}</td>
@@ -148,8 +164,77 @@ export default {
     },
     data() {
         return {
-            count: 0,
-            data_modal:[]
+
+            data_modal:[],
+
+            show: 5,
+            field: 'name',
+            order: 'DESC',
+            search: '',
+            users_: [],
+            pagination: {
+                total: 0,
+                current_page: 0,
+                per_page: 0,
+                last_page: 0,
+                from: 0,
+                to: 0,
+            },
+            offset: 3,
+            setTimeoutBuscador: '',
+
+        }
+    },
+    mounted(){
+        this.users_ = this.users.data;
+        this.getUsers();
+    },
+    computed: {
+        count(){
+          var counted = 0;
+          counted = this.pagination.from + parseInt(this.show) - 1;
+          if (counted > this.pagination.total) {
+            counted = this.pagination.total;
+          }
+          return counted;
+        },
+        isActived(){
+
+          return this.pagination.current_page;
+        },
+        pagesNumber() {
+          if (!this.pagination.to) {
+            return [];
+          }
+          var from = this.pagination.current_page - this.offset;
+          if (from < 1) {
+            from = 1;
+          }
+          var to = from + this.offset * 2;
+          if (to >= this.pagination.last_page) {
+            to = this.pagination.last_page;
+          }
+          var pagesArray = [];
+          while (from <= to) {
+            pagesArray.push(from);
+            from++;
+          }
+          return pagesArray;
+        },
+        validateRolesComputed()
+        {
+            let x = this.form_user.roles_user.length;
+            if ( x == 0)
+            {
+
+            }
+            else
+            {
+                $("#rol_validate").removeClass('error-j');
+                $("#vs1__combobox").removeClass('v-select-error');
+            }
+
+            return x;
         }
     },
     methods:{
@@ -159,9 +244,35 @@ export default {
             $('#user_modal').modal('show');
         },
 
+        getUsers(page)
+        {
+            var payload = {
+                show:this.show,
+                field:this.field,
+                order:this.order,
+                search:this.search
+            };
 
+            this.loading = true;
 
+            axios.post("/users-pagination?page=" +
+                page +
+                "&show=" +
+                this.show +
+                "&search=" +
+                this.search
+            , payload)
+            .then(response => {
+              this.pagination = response.data.pagination;
+              this.users_     = response.data.users.data;
+              console.log("pagination::",response.data.users.data)
+            })
+            .catch(error => {
+                // var data = error.response.data;
+            });
 
+            this.loading = false;
+        },
         deleteProduct(id)
         {
             Swal.fire({
@@ -177,7 +288,7 @@ export default {
                     axios.delete("./users/"+id)
                     .then(response => {
                         Swal.fire('Producto eliminado!', '', 'success')
-                        this.getProducts();
+                        this.getUsers();
                     })
                     .catch(error => {
                       var data = error.data;
@@ -189,7 +300,37 @@ export default {
                     Swal.fire('Ten mas cuidado a la proxima', '', 'info')
                 }
             });
-        }
+        },
+
+        // Metodos paginación
+        changePage(page) 
+        {
+          this.pagination.current_page = page;
+          this.getUsers(page);
+        },
+        changeOrder(val)
+        {
+          if(this.field == val)
+          {
+            if(this.order == 'DESC')
+            {
+              this.order='ASC'
+            }else{
+              this.order='DESC'
+            }
+          }else{
+            this.field=val;
+          }
+
+          this.getUsers();
+        },
+        searchProduct(){
+          
+          clearTimeout( this.setTimeoutBuscador );
+
+          this.setTimeoutBuscador=setTimeout( this.getUsers , 200);
+        },
+
     }
 }
 	

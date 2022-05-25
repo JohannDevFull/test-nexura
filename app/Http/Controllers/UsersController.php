@@ -61,24 +61,9 @@ class UsersController extends Controller
             "areas.name as area_name"
         ])  
         ->orderBy($field, $order)
-        ->where('user_name','like','%'.$request['search'].'%')
-        ->orwhere('name','like','%'.$request['search'].'%')
-        ->orwhere('last_name','like','%'.$request['search'].'%')
+        ->where('users.name','like','%'.$request['search'].'%')
         ->join('areas','users.fk_area_id','areas.id')
-        // ->join('areas','users.fk_area_id','areas.id')
         ->paginate($show);
-
-        $users = [
-            'pagination' => [
-                'total'         => $users->total(),
-                'current_page'  => $users->currentPage(),
-                'per_page'      => $users->perPage(),
-                'last_page'     => $users->lastPage(),
-                'from'          => $users->firstItem(),
-                'to'            => $users->lastPage()
-            ],
-            'users' => $users,
-        ];
 
         return [
             'pagination' => [
