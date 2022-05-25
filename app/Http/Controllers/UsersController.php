@@ -24,10 +24,24 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $field  = 'name';
+        $order  = 'DESC';
+
+        $users = User::select([
+            "users.*",
+            "areas.name as area_name"
+        ])  
+        ->orderBy($field, $order)
+        ->where('users.name','like','%'.$request['search'].'%')
+        ->join('areas','users.fk_area_id','areas.id')
+        // ->join('areas','users.fk_area_id','areas.id')
+        ->paginate(5);
+
         return Inertia::render('Users/IndexUsers', [
-            'users' => User::all()
+            'users' => $users
         ]);
     }
 
@@ -42,11 +56,29 @@ class UsersController extends Controller
         $field  = $request->field;
         $order  = $request->order;
 
-        $users = User::orderBy($field, $order)
+        $users = User::select([
+            "users.*",
+            "areas.name as area_name"
+        ])  
+        ->orderBy($field, $order)
         ->where('user_name','like','%'.$request['search'].'%')
         ->orwhere('name','like','%'.$request['search'].'%')
         ->orwhere('last_name','like','%'.$request['search'].'%')
+        ->join('areas','users.fk_area_id','areas.id')
+        // ->join('areas','users.fk_area_id','areas.id')
         ->paginate($show);
+
+        $users = [
+            'pagination' => [
+                'total'         => $users->total(),
+                'current_page'  => $users->currentPage(),
+                'per_page'      => $users->perPage(),
+                'last_page'     => $users->lastPage(),
+                'from'          => $users->firstItem(),
+                'to'            => $users->lastPage()
+            ],
+            'users' => $users,
+        ];
 
         return [
             'pagination' => [

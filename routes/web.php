@@ -32,7 +32,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     Route::post('/users', 			[UsersController::class, 'store'])->name('users.store');
     Route::put('/users', 			[UsersController::class, 'update'])->name('users.update');
     Route::post('/users-pagination',[UsersController::class, 'pagination']);
-    Route::delete('/users', 		[UsersController::class, 'destroy'])->name('users.delete');
+    Route::delete('/users/{id}', 	[UsersController::class, 'destroy'])->name('users.delete');
     Route::delete('/users-force', 	[UsersController::class, 'deleteForce'])->name('users.delete_force');
 
 });

@@ -7,156 +7,193 @@
             <div class="col-12 ">
                 <h4 class="mb-3">Información usuario</h4>
                 
-                <form id="form_user" class="needs-validation" >
-                  
-                    <div class="row g-3 mb-3">
+                <form id="form_user" class="needs-validation">
 
-                        <div class="col-6">
-                            <label for="username" class="form-label">
-                                Username
-                                <span class="text-danger">(*)</span>
-                            </label>
-                            <div class="input-group has-validation">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                <input 
-                                    disabled 
-                                    id="user_name" 
-                                    name="user_name" 
-                                    type="text" 
-                                    class="form-control" 
-                                    placeholder="Username"
-                                    v-model="_data_user.user_name"
-                                    >
-                                <div class="invalid-feedback">
-                                  El campo "Username" es obligatorio.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <label for="email" class="form-label">
-                                Email
-                                <span class="text-danger">(*)</span>
-                            </label>
-                            <div class="input-group has-validation">
-                                <span class="input-group-text">@</span>
-                                <input 
-                                    disabled
-                                    id="email" 
-                                    name="email" 
-                                    type="email" 
-                                    class="form-control" 
-                                    placeholder="you@example.com"
-                                    v-model="_data_user.email"
-                                    >
-                                <div class="invalid-feedback">
-                                    Por favor ingresar un correo electronico valido.
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-sm-6">
-                            <label for="firstName" class="form-label">
-                                Nombres
-                                <span class="text-danger">(*)</span>
-                            </label>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">
+                            Nombres completos
+                             
+                        </label>
+                        <div class="col-sm-9">
                             <input 
-                                disabled
-                                id="name"  
-                                type="text" 
-                                class="form-control was-validated" 
-                                placeholder="Nombre" 
+                                id="name" 
                                 name="name"
-                                v-model="_data_user.name" 
-                                required
-                                >
-                            <div class="invalid-feedback">
-                                Valid first name is required.
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label for="lastName" class="form-label">
-                                Apellidos
-                                <span class="text-danger">(*)</span>
-                            </label>
-                            <input 
-                                disabled
-                                id="lastName" 
-                                name="last_name" 
                                 type="text" 
                                 class="form-control" 
-                                placeholder=""
-                                v-model="_data_user.last_name"  
+                                placeholder="Nombre completo del usuario"
+                                v-model="_data_user.name"
+                                disabled 
                                 >
-                          <div class="invalid-feedback">
-                            Valid last name is required.
-                          </div>
+                            <div class="invalid-feedback">
+                                Campo obligatorio.
+                            </div>
                         </div>
-
-                        <!-- <div class="col-6">
-                            <label for="country" class="form-label">
-                                Roles
-                                <span class="text-danger">(*)</span>
-                            </label>
-                            <v-select 
-                                multiple 
-                                v-model="_data_user.roles_user" 
-                                :options="roles" 
-                                label="name" 
-                                append-to-body
-                                :calculate-position="withPopper"
+                    </div>
+                  
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">
+                            Correo electronico
+                             
+                        </label>
+                        <div class="col-sm-9">
+                            <input 
+                                id="email" 
+                                name="email" 
+                                type="email" 
+                                class="form-control" 
+                                placeholder="you@example.com"
+                                v-model="_data_user.email"
+                                disabled 
                                 >
-                                <label for="position" style="display: block; margin: 1rem 0; background: purple">
-                                  <input
-                                    id="position"
-                                    v-model="_data_user.placement"
-                                    type="checkbox"
-                                    true-value="top"
-                                    false-value="bottom"
-                                  />
-                                  Position dropdown above
+                            <div class="invalid-feedback">
+                                Por favor ingresar un correo electronico valido.
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset class="form-group row">
+                        <label for="sex" class="col-sm-3 col-form-label">
+                            Sexo
+                             
+                        </label>
+                        <div class="col-sm-9">
+                            <div class="form-check">
+                                <input 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="gridRadios" 
+                                    id="gridRadios1" 
+                                    value="M" 
+                                    v-model="_data_user.sex"
+                                    required 
+                                    disabled 
+                                    >
+                                <label id="sex" class="form-check-label" for="gridRadios1">
+                                  Masculino
                                 </label>
-                            </v-select>
-
-                            <div id="rol_validate" class="invalid-feedback">
-                                Seleccione algun rol. {{validateRolesComputed}}
                             </div>
-                        </div> -->
-
-                        <div class="col-sm-6">
-                            <label for="phone" class="form-label">
-                                Telefono
-                                <span class="text-muted">(Optional)</span>
-                            </label>
-                            <input 
-                                disabled
-                                id="phone" 
-                                name="phone" 
-                                type="text" 
-                                class="form-control" 
-                                placeholder="+57 3118523576" 
-                            >
-                            <div class="invalid-feedback">
-                                Valid last name is required.
+                            <div class="form-check">
+                                <input 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="gridRadios" 
+                                    id="gridRadios2" 
+                                    value="F"
+                                    v-model="_data_user.sex"
+                                    required 
+                                    >
+                                <label id="sex" class="form-check-label" for="gridRadios2">
+                                  Famenino
+                                </label>
+                            </div>
+                            <div class="invalid-feedback" id="error-ratios">
+                                Campo obligatorio. {{validateSexComputed}}
                             </div>
                         </div>
+                    </fieldset>
 
+                    <!-- <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">
+                            Area
+                             
+                        </label>
+                        <div class="col-sm-9">
+                            <div class="input-group mb-3">
+                                <select 
+                                    id="area"
+                                    name="area" 
+                                    class="form-control custom-select"
+                                    v-model="_data_user.area_id" 
+                                    required
+                                    >
+                                    <option disabled>Selecione un area</option>
+                                    <option :value="item.id" v-for="(item,i) in areas">
+                                        {{item.name}}
+                                    </option>
+                                </select>
+                                <div class="input-group-append">
+                                    <label class="input-group-text" for="inputGroupSelect02">
+                                        Opciones
+                                    </label>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Campo obligatorio.
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">
+                            Descripción
+                             
+                        </label>
+                        <div class="col-sm-9">
+                            <textarea 
+                                id="description" 
+                                name="description" 
+                                class="form-control" 
+                                v-model="_data_user.description" 
+                                rows="3"
+                                disabled 
+                                >
+                                
+                            </textarea>
+                            <div class="invalid-feedback">
+                                Campo obligatorio.
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="d-flex justify-content-center mb-3">
-                        <ul class="list-group">
-                            <li class="list-group-item list-group-item-danger" v-for="( item , i ) in errors" :key="i">
-                                {{item}}
-                            </li>
-                        </ul>
-                    </div>
+                    <fieldset class="form-group row">
+                        <label for="sex" class="col-sm-3 col-form-label">
+                            Roles
+                             
+                        </label>
+                        <div class="col-sm-9">
+                            <div class="form-check" v-for="(rol , i) in roles" :key="i">
+                                <input 
+                                    :id="'rol_'+i" 
+                                    name="roles" 
+                                    class="form-check-input" 
+                                    type="checkbox" 
+                                    :value="rol" 
+                                    v-model="user.roles_user"
+                                    disabled
+                                    >
+                                <label class="form-check-label" :for="'rol_'+i">
+                                  {{rol}}
+                                </label>
+                            </div>
+                            <div id="rol_validate" class="invalid-feedback">
+                                Seleccione algun rol. 
+                                <span class="d-hide">
+                                    {{validateRolesComputed}}
+                                </span>
+                            </div>
+                        </div>
+                    </fieldset>
 
-                    <div class="d-flex justify-content-center">
-                        <button class="m-auto btn btn-primary btn-lg" type="submit">Crear</button>
-                    </div>
+                    <div class="form-group row">
                         
-
+                        <label for="password_confirmation" class="col-sm-3 col-form-label">
+                            Recibir boletín infomativo
+                        </label>
+                        <div class="col-sm-9">
+                            <div class="form-check">
+                                <input 
+                                    id="subscription"
+                                    name="subscription"
+                                    class="form-check-input" 
+                                    type="checkbox" 
+                                    v-model="_data_user.subscription"
+                                    checked="true" 
+                                    disabled
+                                    >
+                            </div>
+                        </div>
+                    </div>
+                
                 </form>
             
             </div>

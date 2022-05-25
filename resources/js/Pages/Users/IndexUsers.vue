@@ -45,10 +45,11 @@
                             
                             <tr>
                               <th>ID</th>
-                              <th>Username</th>
                               <th>Name</th>
                               <th>Email</th>
-                              <th>Date</th>
+                              <th>Sexo</th>
+                              <th>Area</th>
+                              <th>Bolenti</th>
                               <th style="width: 182px;">Actions</th>
                             </tr>
 
@@ -56,15 +57,29 @@
                         
                         <tbody>
 
-                            <tr v-for="(item,i) in users" :key="i">
+                            <tr v-for="(item,i) in users.data" :key="i">
                                 
                                 <td>{{item.id}}</td>
-                                <td>{{item.user_name}}</td>
-                                <td>{{item.full_name}}</td>
+                                <td>{{item.name}}</td>
                                 <td>{{item.email}}</td>
+                                <td>
+                                    <span class="tag tag-success" v-if="item.sex == 'M'" >
+                                        Masculino
+                                    </span>
+                                    <span class="tag tag-danger" v-else>
+                                        Femenino
+                                    </span>
+                                </td>
+                                <td>{{item.area_name}}</td>
                                 
                                 <td>
-                                    <span class="tag tag-success">{{item.create_at}}</span>
+                                    <span class="tag tag-success" v-if="item.boletin == 1 || item.boletin ==true">
+                                        Si
+                                    </span>
+                                    <span class="tag tag-danger" v-else>
+                                        No
+                                    </span>
+
                                 </td>
                               
                                 <td>
@@ -74,7 +89,7 @@
                                     <Link class="btn btn-warning" href="/users/edit" method="get" :data="{ id: item.id }">
                                         <i class="fas fa-edit"></i>
                                     </Link>-
-                                    <button class="btn btn-danger">
+                                    <button class="btn btn-danger" @click="deleteProduct(item.id)">
                                         <i class="fas fa-trash"></i>
                                     </button>
 
@@ -105,6 +120,8 @@
 
         <ShowUserModal :_id="'user_modal'" :_data_user="data_modal" />
 
+
+
     </AppLayout>
 	
 </template>
@@ -117,6 +134,7 @@
 
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import Swal from 'sweetalert2'
 
 import ShowUserModal from './Components/ShowUserModal.vue';
 
@@ -125,7 +143,8 @@ export default {
     components: {
         AppLayout,
         ShowUserModal,
-        Link
+        Link,
+        Swal
     },
     data() {
         return {
@@ -136,8 +155,40 @@ export default {
     methods:{
         openModal(i)
         {
-            this.data_modal = this.users[i];
+            this.data_modal = this.users.data[i];
             $('#user_modal').modal('show');
+        },
+
+
+
+
+        deleteProduct(id)
+        {
+            Swal.fire({
+                title: 'Quieres eliminar este usuario?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Eliminar',
+                denyButtonText: `NO`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed)
+                {
+                    axios.delete("./users/"+id)
+                    .then(response => {
+                        Swal.fire('Producto eliminado!', '', 'success')
+                        this.getProducts();
+                    })
+                    .catch(error => {
+                      var data = error.data;
+                    });
+
+                }
+                else if (result.isDenied)
+                {
+                    Swal.fire('Ten mas cuidado a la proxima', '', 'info')
+                }
+            });
         }
     }
 }
