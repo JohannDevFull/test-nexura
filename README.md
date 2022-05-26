@@ -5,7 +5,7 @@
 
 </p>
 
-# Test Konecta - gestion de productos 
+# Test Nexura internacional - gestion de Usuarios/Empleados 
 
 ## Comenzando 🚀
 
