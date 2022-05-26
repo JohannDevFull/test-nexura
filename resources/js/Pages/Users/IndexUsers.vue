@@ -9,10 +9,14 @@
                 
                 <div class="card-header">
                     
-                    <h3 class="card-title">Usuarios</h3>
+                    <h3 class="card-title mb-2">Usuarios</h3>
 
-                    <div class="card-tools" style="width: 360px">
-                        <div class="input-group input-group-sm mr-2" style="width: 200px; display: inline-flex;">
+                    <div 
+                      class="card-tools d-flex justify-content-end" 
+                      style="width: 320px;position: relative;right: -22px; "
+                      >
+                        
+                        <div class="input-group input-group-sm mr-2" style="width: 160px; display: inline-flex;">
                             <input 
                                 type="text" 
                                 name="table_search" 
@@ -34,7 +38,7 @@
                             style="width: 150px;display: inline-flex;"
                             >
 
-                            <Link class="btn btn-default" href="/users/create" > 
+                            <Link class="btn btn-sm  btn-default" href="/users/create" > 
                                 <i class="fas fa-plus"></i> Crear usuario
                             </Link>
 
@@ -320,7 +324,7 @@ export default {
     methods:{
         openModal(i)
         {
-            this.data_modal = this.users.data[i];
+            this.data_modal = this.users_[i];
             $('#user_modal').modal('show');
         },
 

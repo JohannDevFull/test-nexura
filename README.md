@@ -108,6 +108,12 @@ _Y por ultimo levantar el servidor_
 php artisan serve
 ```
 
+_Y si todo a salido bien ya tendra una visualizacion del proyecto en la dirección_
+
+```
+http://127.0.0.1:8000/
+```
+
 
 
 _Tambien puede dirigirse a una previsualizacion del proyecto alojado en un hosting en la siguiente dirección._
@@ -122,7 +128,6 @@ pass: admin.123
 ```
 
 
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
 
 ## Versionado 📌
 
@@ -130,7 +135,6 @@ Uso [Github](https://github.com//)
 
 ## Autores ✒️
 
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
 
 * **Johann Ramirez D.** - *Desarrollo fullstack* - [JohannDevFull](https://github.com/JohannDevFull)
 

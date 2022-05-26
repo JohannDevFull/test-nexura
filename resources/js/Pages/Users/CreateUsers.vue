@@ -19,9 +19,9 @@
 		                            
 		                            >
 
-		                            <Link class="btn btn-default" href="/users/create" > 
+		                            <button class="btn btn-default" @click="returnHistory()" > 
 		                                <i class="fas fa-backspace pr-1"></i>Regresar
-		                            </Link>
+		                            </button>
 
 		                        </div>
 
@@ -502,6 +502,10 @@ export default {
 				    })
 	            });
 	     	}
+    	},
+    	returnHistory()
+    	{
+    		Inertia.get('/users', { search: 'John' }, { replace: true })
     	}
     }
 }

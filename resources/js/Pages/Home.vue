@@ -29,9 +29,12 @@
       <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
         
         <div class="text-end" v-if="!$page.props.user">
-          <Link class="btn btn-outline-light me-2" :href="route('login')">
+          <!-- <Link class="btn btn-outline-light me-2" :href="route('login')">
               Log in
-          </Link>
+          </Link> -->
+          <a class="btn btn-outline-light me-2" :href="route('login')">
+              Log in
+          </a>
         </div>
 
       </ul>
